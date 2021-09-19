@@ -66,13 +66,23 @@ async def on_message(message):
         return
 
     if message.content.startswith('$oi'):
-        await message.channel.send('Oie, eu sou a BlueBot! <:blue_love_emote:875531652795883551>')
+        return await message.channel.send('Oie, eu sou a BlueBot! <:blue_love_emote:875531652795883551>')
 
     if message.content.startswith('$live'):
         if check_twitch():
-            await message.channel.send(random.choice(live_messages))
+            return await message.channel.send(random.choice(live_messages))
         else:
-            await message.channel.send('Parece que a ' + blue_user + ' não está ao vivo agora...')
+            return await message.channel.send('Parece que a ' + blue_user + ' não está ao vivo agora...')
+
+    if can_react(message.content):
+        return await message.add_reaction(haha_emote)
+
+
+def can_react(message):
+    if 'kkkk' in message:
+        return True
+    else:
+        return False
 
 
 client.run(os.getenv('TOKEN'))
